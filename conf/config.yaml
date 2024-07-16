@@ -1,0 +1,13 @@
+jwt:
+  signKey: "MBe&ekkoIp_5WAlhd&vIbbllxIjT6iMB"
+server:
+  listen: :6000
+log:
+  filename: logs/app.log
+  # M
+  maxSize: 1024
+  # Day
+  maxAge: 10
+  level: debug
+  reportCaller: false
+  outputToConsole: true

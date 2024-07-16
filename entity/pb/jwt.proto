@@ -1,0 +1,51 @@
+syntax = "proto3";
+package com.seezoon.jwt;
+option go_package="github.com/seezoon-go-stub/jwt-server-stub;pb";
+option java_package="com.seezoon.jwt.stub";
+option java_multiple_files = true;
+import "validate/validate.proto";
+
+message JwtInfo {
+  // 主题，一般放关键业务标识字段，如用户ID
+  string sub = 1;
+  // 签发者，一般可以放业务标识，如登录，短信验证
+  string iss = 2;
+  // 观众，一般代表接收方
+  repeated string aud = 3;
+  // 过期时间戳（秒）
+  int64 exp = 4;
+  // 不早于某个时间使用，时间戳（秒）
+  int64 nbf = 5;
+  // 签发时间
+  int64 iat = 6;
+  // jwt token id
+  string jti = 7;
+  // 自定义属性，不能包含上述字段
+  map<string, string> attributes = 8;
+}
+
+// 通常设置sub和exp
+message SignReq {
+  JwtInfo JwtInfo = 1 [(validate.rules).message.required = true];
+}
+
+message SignResp {
+  string token = 1;
+}
+
+message VerifyReq {
+  string token = 1 [(validate.rules).string={min_len: 20}];
+}
+
+message VerifyResp {
+  // 不合法，过期等都为false
+  bool valid = 1;
+  JwtInfo JwtInfo = 2;
+}
+
+service Jwt {
+  // 签发
+  rpc Sign(SignReq) returns(SignResp) {};
+  // 验证
+  rpc Verify(VerifyReq) returns(VerifyResp) {};
+}
