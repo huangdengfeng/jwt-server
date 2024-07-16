@@ -43,6 +43,7 @@ func Sign(jwtInfo *JwtInfo, secretKey []byte) (string, error) {
 	signed, err := token.SignedString(secretKey)
 	if err != nil {
 		log.Errorf("jwt sign string err [%s]", err)
+		return "", errs.JwtError.Newf(err)
 	}
-	return signed, err
+	return signed, nil
 }
