@@ -26,7 +26,7 @@ message JwtInfo {
 
 // 通常设置sub和exp
 message SignReq {
-  JwtInfo JwtInfo = 1 [(validate.rules).message.required = true];
+  JwtInfo jwtInfo = 1 [(validate.rules).message.required = true];
 }
 
 message SignResp {
@@ -40,7 +40,7 @@ message VerifyReq {
 message VerifyResp {
   // 不合法，过期等都为false
   bool valid = 1;
-  JwtInfo JwtInfo = 2;
+  JwtInfo jwtInfo = 2;
 }
 
 service Jwt {
