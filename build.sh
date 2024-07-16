@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 go test ./...
+#go test -bench=. ./...
 DIR=$(cd "$(dirname $0)" && pwd)
 APP_NAME="${DIR##*/}"
 cd $DIR
