@@ -8,6 +8,7 @@ import (
 	c "jwt-server/entity/grpc/client"
 	"jwt-server/entity/grpc/server"
 	"jwt-server/entity/pb"
+	"jwt-server/service"
 	"os"
 	"testing"
 	"time"
@@ -26,8 +27,10 @@ func TestMain(m *testing.M) {
 func setup() {
 	config.ServerConfigPath = "../conf"
 	config.Init()
-
-	server.Start()
+	var createJwtServer = func() pb.JwtServer {
+		return &service.JwtServerImpl{}
+	}
+	server.Start(createJwtServer())
 
 	// start client
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithConnectParams(grpc.ConnectParams{MinConnectTimeout: 1 * time.Second})}
