@@ -5,14 +5,12 @@ import (
 	"google.golang.org/grpc"
 	"jwt-server/entity/config"
 	"jwt-server/entity/pb"
-	"jwt-server/service"
 	"net"
 )
 
-func Start() *grpc.Server {
-
+func Start(jwtServer pb.JwtServer) *grpc.Server {
 	var grpcServer = grpc.NewServer(CreateDefaultInterceptor())
-	pb.RegisterJwtServer(grpcServer, &service.JwtServerImpl{})
+	pb.RegisterJwtServer(grpcServer, jwtServer)
 
 	go func() {
 		listen, err := net.Listen("tcp", config.Global.Server.Listen)
