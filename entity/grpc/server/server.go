@@ -18,7 +18,7 @@ var kep = keepalive.EnforcementPolicy{
 }
 
 func Start(jwtServer pb.JwtServer) *grpc.Server {
-	var grpcServer = grpc.NewServer(grpc.KeepaliveParams(kp), grpc.KeepaliveEnforcementPolicy(kep), CreateDefaultInterceptor())
+	var grpcServer = grpc.NewServer(grpc.KeepaliveParams(kp), grpc.KeepaliveEnforcementPolicy(kep), createDefaultInterceptor())
 	pb.RegisterJwtServer(grpcServer, jwtServer)
 
 	go func() {
