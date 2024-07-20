@@ -1,7 +1,7 @@
 syntax = "proto3";
 package com.seezoon.jwt;
 option go_package="github.com/seezoon-go-stub/jwt-server-stub;pb";
-option java_package="com.seezoon.jwt.stub";
+option java_package="com.seezoon.stub.jwt";
 option java_multiple_files = true;
 import "validate/validate.proto";
 
