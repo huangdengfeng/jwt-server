@@ -30,7 +30,7 @@ func setup() {
 	server.Start(createJwtServer())
 
 	// start client
-	gclient.CreateClient(config.Global.Server.Listen)
+	client = gclient.CreateClient(config.Global.Server.Listen)
 
 	log.Infof("[test] set up init success")
 }
