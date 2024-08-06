@@ -24,10 +24,10 @@ func TestMain(m *testing.M) {
 func setup() {
 	config.ServerConfigPath = "../conf"
 	config.Init()
-	var createJwtServer = func() pb.JwtServer {
+	var createServer = func() pb.JwtServer {
 		return &service.JwtServerImpl{}
 	}
-	server.Start(createJwtServer())
+	server.Start(createServer())
 
 	// start client
 	client = gclient.CreateClient(config.Global.Server.Listen)

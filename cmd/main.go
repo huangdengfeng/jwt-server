@@ -15,7 +15,7 @@ func main() {
 	config.Init()
 	defer config.Shutdown()
 
-	s := server.Start(createJwtServer())
+	s := server.Start(createServer())
 
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
@@ -24,6 +24,6 @@ func main() {
 	server.Stop(s)
 }
 
-func createJwtServer() pb.JwtServer {
+func createServer() pb.JwtServer {
 	return &service.JwtServerImpl{}
 }
